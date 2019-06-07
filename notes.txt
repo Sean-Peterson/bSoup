@@ -1,0 +1,22 @@
+What we are trying to do is to grab stuff like memory, waterproof, lcd size, lcd type, resolution - by using this bSoup web scraper. Get it for each launch, company, model of phones.
+
+DUE ABOUT THE 15 OF JUNE
+
+
+py
+import urllib.request
+iphonexsmax="https://www.gsmarena.com/apple_iphone_xs_max-9319.php"
+page=urllib.request.urlopen(iphonexsmax)
+from bs4 import BeautifulSoup
+soup=BeautifulSoup(page)
+all_tds=soup.find_all('td')
+right_td=soup.find_all('td', class_='nfo')
+right_td
+
+
+What I want to do:
+Create an array of url's that includes every product that we want
+Iterate through each of them and grab the information that we want
+Push that info to an array where each group of information is saved together as a single index in the array
+Create another function that parses that information into useful x=y info where x is the feature and y is the value
+Export all of that information to an excel spreadsheet, or something. 
