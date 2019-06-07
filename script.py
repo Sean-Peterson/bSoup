@@ -7,10 +7,16 @@ all_ths=soup.find_all('th')
 all_tds=soup.find_all('td')
 nfo_td=soup.find_all('td', class_='nfo')
 currentPhone = []
-allInfo = []
+currentPhoneStrings = []
+allPhones = []
+
 # to find Model Name 0
 title=soup.find_all(attrs={"data-spec": "modelname"})
 currentPhone.append(str(title))
+titleString = str(title)
+titleString1 = titleString.split('>')
+titleString2 = titleString1[1].split('<')
+titleString3 = titleString2[0]
 # to find Network 1
 network=soup.find_all(attrs={"data-spec": "nettech"})
 currentPhone.append(str(network))
@@ -98,8 +104,8 @@ currentPhone.append(str(batdescription1))
 # CHARGING does not have a data spec 36-37
 battalktime1=soup.find_all(attrs={"data-spec": "battalktime1"})
 currentPhone.append(str(battalktime1))
-batmusicplay1=soup.find_all(attrs={"data-spec": "batmusicplay1"})
-currentPhone.append(str(batmusicplay1))
+batmusicplayback1=soup.find_all(attrs={"data-spec": "batmusicplayback1"})
+currentPhone.append(str(batmusicplayback1))
 # to find MISC 38-40
 colors=soup.find_all(attrs={"data-spec": "colors"})
 currentPhone.append(str(colors))
@@ -109,15 +115,16 @@ price=soup.find_all(attrs={"data-spec": "price"})
 currentPhone.append(str(price))
 # to find Tests
 # No tests have data specs
+for spec in currentPhone:
+    currentString = spec
+    currentString1 = currentString.split('>')
+    currentString2 = currentString1[1].split('<')
+    currentString3 = currentString2[0]
+    currentPhoneStrings.append(currentString3)
+allPhones.append(currentPhoneStrings)
+print(allPhones[0])
 
-allInfo.append(currentPhone)
-tester = allInfo[0][40]
-tester1 = tester.split('>')
-print(tester1)
-tester2 = tester1[1].split('<')
-print(tester2)
-tester3 = tester2[0]
-print(tester3)
+
 
 
 
