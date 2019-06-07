@@ -26,4 +26,6 @@ Export all of that information to an excel spreadsheet, or something.
 NEXT UP
 there are exactly 13 categories that we are tracking
 we need to make each of them a parent array
-we might also need to make the subheading a child array and then the values their children. 
+we might also need to make the subheading a child array and then the values their children.
+
+go to each page and create a bSoup crawler to grab the a hrefs so we don't have to type them in ourselves. 

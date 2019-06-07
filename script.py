@@ -123,19 +123,17 @@ for url in urls:
         else:
             pass
     allPhones.append(currentPhoneStrings)
-# wb = Workbook()
-# for phone in allPhones:
-#     i = 0
-#     sheet = wb.add_sheet(str(phone[i]))
-#     i += 1
-#     j = 0
-#     for spec in phone:
-#         collumn = j
-#         print(spec)
-#         sheet.write(collumn,0,spec)
-#         j+= 1
-# wb.save('xlwt example.xls')
-
+wb = Workbook()
+for phone in allPhones:
+    i = 0
+    sheet = wb.add_sheet(str(phone[i]))
+    i += 1
+    j = 0
+    for spec in phone:
+        collumn = j
+        sheet.write(collumn,0,spec)
+        j+= 1
+wb.save('GSM phone.xls')
 
 
 
