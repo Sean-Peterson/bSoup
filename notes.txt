@@ -19,4 +19,11 @@ Create an array of url's that includes every product that we want
 Iterate through each of them and grab the information that we want
 Push that info to an array where each group of information is saved together as a single index in the array
 Create another function that parses that information into useful x=y info where x is the feature and y is the value
-Export all of that information to an excel spreadsheet, or something. 
+Export all of that information to an excel spreadsheet, or something.
+
+
+
+NEXT UP
+there are exactly 13 categories that we are tracking
+we need to make each of them a parent array
+we might also need to make the subheading a child array and then the values their children. 

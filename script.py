@@ -10,6 +10,8 @@ for url in urls:
     page=urllib.urlopen(url)
     soup=BeautifulSoup(page, 'lxml')
 
+    all_ths=soup.find_all('th')
+    print(all_ths)
     # to find Model, index numbers Name 0
     title=soup.find_all(attrs={"data-spec": "modelname"})
     currentPhone.append(str(title))
