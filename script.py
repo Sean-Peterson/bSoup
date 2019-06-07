@@ -13,10 +13,6 @@ allPhones = []
 # to find Model Name 0
 title=soup.find_all(attrs={"data-spec": "modelname"})
 currentPhone.append(str(title))
-titleString = str(title)
-titleString1 = titleString.split('>')
-titleString2 = titleString1[1].split('<')
-titleString3 = titleString2[0]
 # to find Network 1
 network=soup.find_all(attrs={"data-spec": "nettech"})
 currentPhone.append(str(network))
