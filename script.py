@@ -31,13 +31,14 @@ for brand in allPhoneBrands:
 allBrandsPages = []
 
 for brandURL in allBrandsURLArray:
+        #Before we get all the links from each main page, we need to figure out how to get every page. This is found in the pages links at the bottom of the page. 
         currentBrand = []
         currentBrandStrings = []
         page=urllib.urlopen("https://www.gsmarena.com/"+str(brandURL))
         soup=BeautifulSoup(page, 'lxml')
 
         makersDiv=soup.find(class_='makers')
-        #Need to figure out how to get all the links from the "makers" data. 
+        #Need to figure out how to get all the links from the "makers" data. Need to either push all of these to a div or find a better way to just grab the links from the a tags in the makers div.
 
 print(makersDiv)
 
