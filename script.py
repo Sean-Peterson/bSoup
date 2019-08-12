@@ -29,18 +29,34 @@ for brand in allPhoneBrands:
 # print(allBrandsURLArray)
 
 allBrandsPages = []
+phones = []
 
+# allBrandsURLArray = ["apple-phones-48.php"]
 for brandURL in allBrandsURLArray:
-        #Before we get all the links from each main page, we need to figure out how to get every page. This is found in the pages links at the bottom of the page. 
+        #Before we get all the links from each main page, we need to figure out how to get every page. This is found in the pages links at the bottom of the page.
+        currentBrandName = str(brandURL).split("-")
+        print(currentBrandName[0])
         currentBrand = []
         currentBrandStrings = []
         page=urllib.urlopen("https://www.gsmarena.com/"+str(brandURL))
         soup=BeautifulSoup(page, 'lxml')
 
-        makersDiv=soup.find(class_='makers')
+        li=soup.find_all('li')
+        for i in li:
+            string = str(i)
+            string1 = string.split('href="')
+            string2 = string1[1].split('"')
+            if currentBrandName[0]+"_" not in string2[0]:
+                pass
+            else:
+                phones.append("https://www.gsmarena.com/"+string2[0])
+
+for i in phones:
+    print(i)
+    #Now we need to get every page for every manufacturer. 
+
         #Need to figure out how to get all the links from the "makers" data. Need to either push all of these to a div or find a better way to just grab the links from the a tags in the makers div.
 
-print(makersDiv)
 
 # urls = ["https://www.gsmarena.com/apple_iphone_xs_max-9319.php","https://www.gsmarena.com/samsung_galaxy_s10+-9535.php"]
 # allPhones = []
