@@ -97,7 +97,7 @@ for brandURL in allBrandsURLArray:
         #Need to figure out how to get all the links from the "makers" data. Need to either push all of these to a div or find a better way to just grab the links from the a tags in the makers div.
 
 allPhonesData=[]
-phones = ["https://www.gsmarena.com/apple_iphone_xs_max-9319.php","https://www.gsmarena.com/apple_iphone_6_plus-6665.php","https://www.gsmarena.com/apple_iphone_6-6378.php"]
+# phones = ["https://www.gsmarena.com/apple_iphone_xs_max-9319.php","https://www.gsmarena.com/apple_iphone_6_plus-6665.php","https://www.gsmarena.com/apple_iphone_6-6378.php"]
 for phone in phones:
     currentPhone = []
     currentPhoneStrings = []
