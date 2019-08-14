@@ -3,14 +3,6 @@ from bs4 import BeautifulSoup
 import xlwt
 from xlwt import Workbook
 
-print("Which phone brand would you like to get data on?")
-userInput = raw_input()
-
-userInputArray = []
-userInputArray = userInput.split(" ")
-for i in userInputArray:
-    print(userInputArray)
-
 allBrandsURL = "https://www.gsmarena.com/makers.php3"
 page=urllib.urlopen(allBrandsURL)
 soup=BeautifulSoup(page, 'lxml')
@@ -36,20 +28,10 @@ for brand in allPhoneBrands:
         allBrandsURLArray.append(currentBrand3)
 # print(allBrandsURLArray)
 
-userBrandsURLArray = []
-
-for i in userInputArray:
-    for b in allBrandsURLArray:
-        if i in b:
-            print(b)
-            userBrandsURLArray.append(b)
-        else:
-            pass
-
 allBrandsPages = []
 phones = []
 # The below line should be commented out in order to run the whole program.
-for brandURL in userBrandsURLArray:
+for brandURL in allBrandsURLArray:
     #Before we get all the links from each main page, we need to figure out how to get every page. This is found in the pages links at the bottom of the page.
     currentBrandName = str(brandURL).split("-")
     print(currentBrandName[0])
@@ -92,8 +74,22 @@ for brandURL in userBrandsURLArray:
                         phones.append("https://www.gsmarena.com/"+string2[0])
 
 
-allPhonesData=[]
+# allPhonesData=[]
 # phones = ["https://www.gsmarena.com/apple_iphone_xs_max-9319.php","https://www.gsmarena.com/apple_iphone_6_plus-6665.php","https://www.gsmarena.com/apple_iphone_6-6378.php"]
+
+wb = Workbook()
+sheet0 = wb.add_sheet("phones")
+sheet1 = wb.add_sheet("phones2")
+sheet2 = wb.add_sheet("phones3")
+sheet3 = wb.add_sheet("phones4")
+i = 0
+starting = 1
+headers = ["title", "network", "year", "status", "dimensions", "weight", "build", "sim", "body other", "display type", "display size", "display resolution", "display protection", "display other", "os", "chipset", "cpu", "gpu", "memory slot", "internal memory", "cam 1 modules", "cam 1 features", "cam 1 video", "cam 2 modules", "cam 2 features", "cam 2 video", "optional other", "wlan", "bluetooth", "gps", "nfc", "radio", "usb", "sensors", "features other", "battery description", "battery talk time", "battery music playback", "colors", "models", "price"]
+for header in headers:
+    row = 0
+    column = i
+    sheet.write(row,column,header)
+    i+=1
 for phone in phones:
     currentPhone = []
     currentPhoneStrings = []
@@ -211,32 +207,33 @@ for phone in phones:
             currentPhoneStrings.append(str(currentString3))
         else:
             currentPhoneStrings.append(str(currentString))
-    allPhonesData.append(currentPhoneStrings)
+    # This is the part of the script to create an XLS using the data
+    counter = 0
+    sheets = ["sheet0","sheet1","sheet2","sheet3"]
+    for phone in currentPhoneStrings:
+        j = 0
+        for spec in phone:
+            if counter < 30000
+                column = j
+                row = starting
+                sheet.write(row,column,spec)
+                j+= 1
+                #is flipper causing a problem? should it be row or column?
+                flipper = 0
+                starting += 1
+            else:
+                column = j
+                row = starting
+                sheet.write(row,column,spec)
+                j+= 1
+                #is flipper causing a problem? should it be row or column?
+                flipper = 0
+                starting += 1
+
+    # allPhonesData.append(currentPhoneStrings)
 
 # for i in allPhonesData:
 #     print(i)
 
 
-# This is the part of the script to create an XLS using the data
-wb = Workbook()
-sheet = wb.add_sheet("apple")
-
-headers = ["title", "network", "year", "status", "dimensions", "weight", "build", "sim", "body other", "display type", "display size", "display resolution", "display protection", "display other", "os", "chipset", "cpu", "gpu", "memory slot", "internal memory", "cam 1 modules", "cam 1 features", "cam 1 video", "cam 2 modules", "cam 2 features", "cam 2 video", "optional other", "wlan", "bluetooth", "gps", "nfc", "radio", "usb", "sensors", "features other", "battery description", "battery talk time", "battery music playback", "colors", "models", "price"]
-i = 0
-for header in headers:
-    row = 0
-    column = i
-    sheet.write(row,column,header)
-    i+=1
-starting = 1
-for phone in allPhonesData:
-    j = 0
-    for spec in phone:
-        column = j
-        row = starting
-        sheet.write(row,column,spec)
-        j+= 1
-        #is flipper causing a problem? should it be row or column?
-        flipper = 0
-    starting += 1
 wb.save('GSM_phones_data.xls')
