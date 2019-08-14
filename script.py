@@ -3,6 +3,14 @@ from bs4 import BeautifulSoup
 import xlwt
 from xlwt import Workbook
 
+print("Which phone brand would you like to get data on?")
+userInput = raw_input()
+
+userInputArray = []
+userInputArray = userInput.split(" ")
+for i in userInputArray:
+    print(userInputArray)
+
 allBrandsURL = "https://www.gsmarena.com/makers.php3"
 page=urllib.urlopen(allBrandsURL)
 soup=BeautifulSoup(page, 'lxml')
@@ -28,11 +36,20 @@ for brand in allPhoneBrands:
         allBrandsURLArray.append(currentBrand3)
 # print(allBrandsURLArray)
 
+userBrandsURLArray = []
+
+for i in userInputArray:
+    for b in allBrandsURLArray:
+        if i in b:
+            print(b)
+            userBrandsURLArray.append(b)
+        else:
+            pass
+
 allBrandsPages = []
 phones = []
 # The below line should be commented out in order to run the whole program.
-# allBrandsURLArray = ["samsung-phones-9.php"]
-for brandURL in allBrandsURLArray:
+for brandURL in userBrandsURLArray:
     #Before we get all the links from each main page, we need to figure out how to get every page. This is found in the pages links at the bottom of the page.
     currentBrandName = str(brandURL).split("-")
     print(currentBrandName[0])
@@ -219,6 +236,7 @@ for phone in allPhonesData:
         row = starting
         sheet.write(row,column,spec)
         j+= 1
+        #is flipper causing a problem? should it be row or column?
         flipper = 0
     starting += 1
 wb.save('GSM_phones_data.xls')
