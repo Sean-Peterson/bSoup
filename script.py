@@ -2,6 +2,7 @@ import urllib
 from bs4 import BeautifulSoup
 import xlwt
 from xlwt import Workbook
+import time
 
 allBrandsURL = "https://www.gsmarena.com/makers.php3"
 page=urllib.urlopen(allBrandsURL)
@@ -32,6 +33,7 @@ allBrandsPages = []
 phones = []
 # The below line should be commented out in order to run the whole program.
 for brandURL in allBrandsURLArray:
+    time.sleep(.333)
     #Before we get all the links from each main page, we need to figure out how to get every page. This is found in the pages links at the bottom of the page.
     currentBrandName = str(brandURL).split("-")
     print(currentBrandName[0])
@@ -53,6 +55,7 @@ for brandURL in allBrandsURLArray:
             phones.append("https://www.gsmarena.com/"+string2[0])
     if totalBrandPages is not None:
         for i in totalBrandPages.descendants:
+            time.sleep(.333)
             string = str(i)
             if currentBrandName[0]+"-phones" not in string:
                 pass
@@ -84,13 +87,21 @@ sheet2 = wb.add_sheet("phones3")
 sheet3 = wb.add_sheet("phones4")
 i = 0
 starting = 1
+starting2 = 1
+starting3 = 1
+starting4 = 1
+counter = 0
 headers = ["title", "network", "year", "status", "dimensions", "weight", "build", "sim", "body other", "display type", "display size", "display resolution", "display protection", "display other", "os", "chipset", "cpu", "gpu", "memory slot", "internal memory", "cam 1 modules", "cam 1 features", "cam 1 video", "cam 2 modules", "cam 2 features", "cam 2 video", "optional other", "wlan", "bluetooth", "gps", "nfc", "radio", "usb", "sensors", "features other", "battery description", "battery talk time", "battery music playback", "colors", "models", "price"]
 for header in headers:
     row = 0
     column = i
-    sheet.write(row,column,header)
+    sheet0.write(row,column,header)
+    sheet1.write(row,column,header)
+    sheet2.write(row,column,header)
+    sheet3.write(row,column,header)
     i+=1
 for phone in phones:
+    time.sleep(.333)
     currentPhone = []
     currentPhoneStrings = []
     page=urllib.urlopen(phone)
@@ -208,27 +219,40 @@ for phone in phones:
         else:
             currentPhoneStrings.append(str(currentString))
     # This is the part of the script to create an XLS using the data
-    counter = 0
-    sheets = ["sheet0","sheet1","sheet2","sheet3"]
+
     for phone in currentPhoneStrings:
         j = 0
         for spec in phone:
-            if counter < 30000
+            counter += 1
+            if counter < 60000:
+                print(counter)
                 column = j
                 row = starting
-                sheet.write(row,column,spec)
+                sheet0.write(row,column,spec)
                 j+= 1
-                #is flipper causing a problem? should it be row or column?
-                flipper = 0
                 starting += 1
+            elif counter >= 60000 and counter < 90000:
+                print(counter)
+                column = j
+                row = starting2
+                sheet1.write(row,column,spec)
+                j+= 1
+                starting2 += 1
+            elif counter >= 90000 and counter < 120000:
+                print(counter)
+                column = j
+                row = starting2
+                sheet1.write(row,column,spec)
+                j+= 1
+                starting3 += 1
             else:
+                print(counter)
                 column = j
-                row = starting
-                sheet.write(row,column,spec)
+                row = starting2
+                sheet1.write(row,column,spec)
                 j+= 1
-                #is flipper causing a problem? should it be row or column?
-                flipper = 0
-                starting += 1
+                starting4 += 1
+
 
     # allPhonesData.append(currentPhoneStrings)
 
