@@ -24,84 +24,84 @@ with open(filename, 'w') as csvfile:
     # this is an array that has all of the brands included in the GSMarena DB. This array will be used to append to gsmarena.com/
     allBrandsURLArray = []
 
-    # for brand in allPhoneBrands:
-    #         currentBrand = str(brand)
-    #         if len(currentBrand) > 5:
-    #             currentBrand1 = currentBrand.split('"')
-    #             # print(currentBrand1)
-    #             currentBrand2 = currentBrand1[1].split('">')
-    #             currentBrand3 = currentBrand2[0]
-    #             # print(currentBrand3)
-    #             # currentBrandURL.append(currentBrand3)
-    #
-    #             # currentBrand2 = currentBrand1[1].split('">')
-    #             # currentBrand3 = currentBrand2[0]
-    #             # currentBrandURL.append(currentBrand3)
-    #         else:
-    #             pass
-    #         allBrandsURLArray.append(currentBrand3)
-    # # print(allBrandsURLArray)
-    #
-    # allBrandsPages = []
-    # phones = []
-    #
-    # # lines 37 - 78 navigates to each individual brand page and then grabs each of the additional pages that the brand has listed on GSM.
-    # for brandURL in allBrandsURLArray:
-    #     # time.sleep(.333)
-    #     currentBrandName = str(brandURL).split("-")
-    #     print(currentBrandName[0])
-    #     currentBrand = []
-    #     currentBrandStrings = []
-    #     try:
-    #         page=urllib.urlopen("https://www.gsmarena.com/"+str(brandURL))
-    #         soup=BeautifulSoup(page, 'lxml')
-    #     except Exception as e:
-    #         print(e)
-    #         pass
-    #
-    #     newBrandsURLArray = []
-    #     totalBrandPages = soup.find(class_="nav-pages")
-    #     li=soup.find_all('li')
-    #     #lines 49 - 57 check if the url is an add or a link to a device page and adds the device url to the phones array.
-    #     for i in li:
-    #         string = str(i)
-    #         string1 = string.split('href="')
-    #         string2 = string1[1].split('"')
-    #         if currentBrandName[0]+"_" not in string2[0]:
-    #             pass
-    #         else:
-    #             phones.append("https://www.gsmarena.com/"+string2[0])
-    #     #lines 59-80 goes through the navigation bar at the bottom of the page and grabs all of the extra pages that the brand has on GSM.
-    #     if totalBrandPages is not None:
-    #         for i in totalBrandPages.descendants:
-    #             # time.sleep(.333)
-    #             string = str(i)
-    #             if currentBrandName[0]+"-phones" not in string:
-    #                 pass
-    #             else:
-    #                 string1 = string.split('="')
-    #                 # print(string1[1])
-    #                 string2 = string1[1].split('">')
-    #                 print(string2[0])
-    #                 try:
-    #                     page=urllib.urlopen("https://www.gsmarena.com/"+str(string2[0]))
-    #                     soup=BeautifulSoup(page, 'lxml')
-    #                     li=soup.find_all('li')
-    #                     for i in li:
-    #                         string = str(i)
-    #                         string1 = string.split('href="')
-    #                         string2 = string1[1].split('"')
-    #                         if currentBrandName[0]+"_" not in string2[0]:
-    #                             pass
-    #                         else:
-    #                             phones.append("https://www.gsmarena.com/"+string2[0])
-    #                 except Exception as e:
-    #                     print(e)
-    #                     pass
+    for brand in allPhoneBrands:
+            currentBrand = str(brand)
+            if len(currentBrand) > 5:
+                currentBrand1 = currentBrand.split('"')
+                # print(currentBrand1)
+                currentBrand2 = currentBrand1[1].split('">')
+                currentBrand3 = currentBrand2[0]
+                # print(currentBrand3)
+                # currentBrandURL.append(currentBrand3)
+
+                # currentBrand2 = currentBrand1[1].split('">')
+                # currentBrand3 = currentBrand2[0]
+                # currentBrandURL.append(currentBrand3)
+            else:
+                pass
+            allBrandsURLArray.append(currentBrand3)
+    # print(allBrandsURLArray)
+
+    allBrandsPages = []
+    phones = []
+
+    # lines 37 - 78 navigates to each individual brand page and then grabs each of the additional pages that the brand has listed on GSM.
+    for brandURL in allBrandsURLArray:
+        # time.sleep(.333)
+        currentBrandName = str(brandURL).split("-")
+        print(currentBrandName[0])
+        currentBrand = []
+        currentBrandStrings = []
+        try:
+            page=urllib.urlopen("https://www.gsmarena.com/"+str(brandURL))
+            soup=BeautifulSoup(page, 'lxml')
+        except Exception as e:
+            print(e)
+            pass
+
+        newBrandsURLArray = []
+        totalBrandPages = soup.find(class_="nav-pages")
+        li=soup.find_all('li')
+        #lines 49 - 57 check if the url is an add or a link to a device page and adds the device url to the phones array.
+        for i in li:
+            string = str(i)
+            string1 = string.split('href="')
+            string2 = string1[1].split('"')
+            if currentBrandName[0]+"_" not in string2[0]:
+                pass
+            else:
+                phones.append("https://www.gsmarena.com/"+string2[0])
+        #lines 59-80 goes through the navigation bar at the bottom of the page and grabs all of the extra pages that the brand has on GSM.
+        if totalBrandPages is not None:
+            for i in totalBrandPages.descendants:
+                # time.sleep(.333)
+                string = str(i)
+                if currentBrandName[0]+"-phones" not in string:
+                    pass
+                else:
+                    string1 = string.split('="')
+                    # print(string1[1])
+                    string2 = string1[1].split('">')
+                    print(string2[0])
+                    try:
+                        page=urllib.urlopen("https://www.gsmarena.com/"+str(string2[0]))
+                        soup=BeautifulSoup(page, 'lxml')
+                        li=soup.find_all('li')
+                        for i in li:
+                            string = str(i)
+                            string1 = string.split('href="')
+                            string2 = string1[1].split('"')
+                            if currentBrandName[0]+"_" not in string2[0]:
+                                pass
+                            else:
+                                phones.append("https://www.gsmarena.com/"+string2[0])
+                    except Exception as e:
+                        print(e)
+                        pass
 
 
     # allPhonesData=[]
-    phones = ["https://www.gsmarena.com/apple_iphone_xs_max-9319.php","https://www.gsmarena.com/apple_iphone_6_plus-6665.php","https://www.gsmarena.com/apple_iphone_6-6378.php","https://www.gsmarena.com/acer_iconia_talk_s-8306.php"]
+    # phones = ["https://www.gsmarena.com/apple_iphone_xs_max-9319.php","https://www.gsmarena.com/apple_iphone_6_plus-6665.php","https://www.gsmarena.com/apple_iphone_6-6378.php","https://www.gsmarena.com/acer_iconia_talk_s-8306.php"]
 
 
 
@@ -155,15 +155,11 @@ with open(filename, 'w') as csvfile:
                         stringArray1 = stringArray[1].split('<')
                         thingTwo = stringArray1[0]
                 elif 'nfo">LTE band' in str(i):
-                    print(i)
                     stringArray = str(i).split('nfo">')
                     stringArray1 = stringArray[1].split('<')
                     fourgContinued = stringArray1[0]
                 else:
                     pass
-            print(thingOne)
-            print(thingTwo)
-            print(fourgContinued)
             currentPhone.append(str(thingOne))
             network=soup.find_all(attrs={"data-spec": "net3g"})
             currentPhone.append(str(network))
@@ -266,9 +262,21 @@ with open(filename, 'w') as csvfile:
             currentPhone.append(str(models))
             price=soup.find_all(attrs={"data-spec": "price"})
             currentPhone.append(str(price))
+            # phonePrice = ""
+            # if "EUR" in str(price):
+            #     price1 = str(price).split(">")
+            #     price2 = price1[1].split(" ")
+            #     if int(price2[1])>=200:
+            #         phonePrice = "High"
+            #     elif int(price2[1])<200 and int(price2[1])>=100:
+            #         phonePrice = "Medium"
+            #     else:
+            #         phonePrice = "low"
+            # else:
+            #     pass
+            # currentPhone.append(phonePrice)
             # to find Tests, index numbers
             # No tests have data specs
-            print(len(currentPhoneStrings))
             for spec in currentPhone:
                 currentString = str(spec)
                 # print(currentString)
@@ -291,13 +299,12 @@ with open(filename, 'w') as csvfile:
             r = 0
             # Code errored out after a max of = 32759
             row = []
-            print(len(headers))
             for spec in currentPhoneStrings:
                 counter += 1
                 starting += 1
                 if counter < len(currentPhoneStrings):
                     # print(counter)
-                    # print(spec)
+                    print(spec)
                     row.append(spec)
                 else:
                     row.append(spec)
