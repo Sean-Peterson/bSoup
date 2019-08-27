@@ -143,23 +143,27 @@ with open(filename, 'w') as csvfile:
             thingTwo = ""
             fourgContinued = ""
             thingCounter = 0
-            for i in allTR:
-                if ">CDMA" in str(i):
-                    if thingCounter < 1:
+            try:
+                for i in allTR:
+                    if ">CDMA" in str(i):
+                        if thingCounter < 1:
+                            stringArray = str(i).split('nfo">')
+                            stringArray1 = stringArray[1].split('<')
+                            thingOne = stringArray1[0]
+                            thingCounter+=1
+                        else:
+                            stringArray = str(i).split('nfo">')
+                            stringArray1 = stringArray[1].split('<')
+                            thingTwo = stringArray1[0]
+                    elif 'nfo">LTE band' in str(i):
                         stringArray = str(i).split('nfo">')
                         stringArray1 = stringArray[1].split('<')
-                        thingOne = stringArray1[0]
-                        thingCounter+=1
+                        fourgContinued = stringArray1[0]
                     else:
-                        stringArray = str(i).split('nfo">')
-                        stringArray1 = stringArray[1].split('<')
-                        thingTwo = stringArray1[0]
-                elif 'nfo">LTE band' in str(i):
-                    stringArray = str(i).split('nfo">')
-                    stringArray1 = stringArray[1].split('<')
-                    fourgContinued = stringArray1[0]
-                else:
-                    pass
+                        pass
+            except Exception as e:
+                print(e)
+
             currentPhone.append(str(thingOne))
             network=soup.find_all(attrs={"data-spec": "net3g"})
             currentPhone.append(str(network))
